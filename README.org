@@ -10,14 +10,16 @@ Simple 2D RPG made in C++ and SFML.
 ** Clone
 
 #+BEGIN_SRC sh
-  $ git clone https://<git>.com/riyyi/rpg
-  $ cd rpg
+  $ git clone --recursive https://github.com/JFarNTIG/simple-rpg
+#+END_SRC
+
+Or
+
+#+BEGIN_SRC sh
+  $ git clone https://github.com/JFarNTIG/simple-rpg
+  $ cd simple-rpg
   $ git submodule init
   $ git submodule update
-#+END_SRC
-Or
-#+BEGIN_SRC sh
-  $ git clone --recursive https://<git>.com/riyyi/rpg
 #+END_SRC
 
 ** Update
@@ -28,6 +30,34 @@ Or
 #+END_SRC
 
 * Build instructions
+
+** Windows
+
+*** Prerequisites
+
+Download and extract build tools:
+
+- [[https://www.msys2.org/][MinGW (64-bit)]]
+
+Install build tools:
+
+#+BEGIN_SRC shell-script
+$ pacman -Syu
+$ pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake
+#+END_SRC
+
+Add build tools to system PATH:
+
+- C:\msys64\mingw64\bin
+
+*** Compile
+
+#+BEGIN_SRC shell-script
+$ mkdir build
+$ cd build
+$ cmake -G "MinGW Makefiles" ..
+$ mingw32-make.exe
+#+END_SRC
 
 ** Linux
 
@@ -44,29 +74,6 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make
-#+END_SRC
-
-** Windows
-
-*** Prerequisites
-
-Download and extract build tools:
-
-- [[https://www.sfml-dev.org/download/sfml/2.5.1/][MinGW (64-bit)]] get the version recommended by SFML!
-- [[https://cmake.org/download/][CMake]]
-
-Add build tools to system PATH:
-
-- C:\mingw64\bin
-- C:\cmake\bin
-
-*** Compile
-
-#+BEGIN_SRC shell-script
-$ mkdir build
-$ cd build
-$ cmake -G "MinGW Makefiles" ..
-$ mingw32-make.exe
 #+END_SRC
 
 * Libraries

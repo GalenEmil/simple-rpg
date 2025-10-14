@@ -4,7 +4,7 @@ IDEA 1
 fix map so player and bots cant get out of it
 
 IDEA 2
- Player should be able to kill white blobs
+Player should be able to kill white blobs
 
 IDEA 3
 

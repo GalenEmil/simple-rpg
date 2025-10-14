@@ -1,10 +1,10 @@
 Ideas for the game
 
 IDEA 1
-fix map so player and bots cant get out of it
+fix map so player and bots cant get out of it. Also fix the house
 
 IDEA 2
-Player should be able to kill white blobs
+Movement, sprint or flight
 
 IDEA 3
 On the map somewhere, there should be a point to collect for each round, and the npc tries to catch/kill the player

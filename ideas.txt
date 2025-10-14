@@ -6,14 +6,5 @@ fix map so player and bots cant get out of it
 IDEA 2
 Player should be able to kill white blobs
 
-
-
-
 IDEA 3
 On the map somewhere, there should be a point to collect for each round, and the npc tries to catch/kill the player
-
-IDEA 4
-Add fullscreen mode
-
-IDEA 5
-Fix the house

@@ -1,10 +1,10 @@
 Ideas for the game
 
 IDEA 1
-Give the trees collision
+fix map so player and bots cant get out of it
 
 IDEA 2
-Add Player should be able to kill white blobs
+ Player should be able to kill white blobs
 
 IDEA 3
-Fix the white blobs. They should not move out of the map.
+

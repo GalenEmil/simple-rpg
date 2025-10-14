@@ -4,7 +4,13 @@ IDEA 1
 Give the trees collision
 
 IDEA 2
-Add Player should be able to kill white blobs
+Player should be able to kill white blobs
 
 IDEA 3
 Fix the white blobs. They should not move out of the map.
+
+IDEA 4
+Add fullscreen mode
+
+IDEA 5
+Fix the house

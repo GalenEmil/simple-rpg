@@ -7,3 +7,4 @@ IDEA 2
 Add Player should be able to kill white blobs
 
 IDEA 3
+Fix the white blobs. They should not move out of the map.

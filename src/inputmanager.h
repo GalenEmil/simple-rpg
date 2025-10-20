@@ -17,6 +17,7 @@ public:
         Up,
         Down,
         LoadMap,
+        SprintAbility,
 
         KeyCount      ///< Keep last -- the total number of inputs
     };

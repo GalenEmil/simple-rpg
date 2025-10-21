@@ -18,6 +18,8 @@ public:
     int GetHealth();
     int GetMaxHealth();
     float GetSpeed();
+    int SetStamina();
+    int GetStamina();
     ~Player();
 
 private:
@@ -27,7 +29,6 @@ private:
     int health;
     int maxHealth;
     float speed;
-    float stamina;
     //float direction;
 };
 

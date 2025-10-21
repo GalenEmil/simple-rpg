@@ -1,27 +1,25 @@
-#ifndef ScoreBoard
-#define ScoreBoard
+#ifndef SCOREBOARD_H
+#define SCOREBOARD_H
 
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
 
-
-#endif // ScoreBoard
-
-class ScoreBoard{
+class ScoreBoard : public sf::Sprite { // Inherit from sf::Sprite
 public:
-ScoreBoard();
-    void addPts(int value); // added parameter to the addPts method
-    int getPts() const; // added getter for points
-    void setPts(int value); // added setter for points so if a consel is made in the future it can be set
+    ScoreBoard();
+    ~ScoreBoard();
+
+    void addPts(int value);
+    int getPts() const;
+    void setPts(int value);
     void Load(std::string fileName);
     void Load(std::string fileName, sf::IntRect rect);
-    void update(sf::RenderWindow* window, int timeElapsed); 
-
-    
+    void update(sf::RenderWindow* window, int timeElapsed);
 
 private:
-    int Pts; 
+    int pts; // Corrected variable name to match implementation
     sf::Texture* texture;
-    
 };
+
+#endif // SCOREBOARD_H

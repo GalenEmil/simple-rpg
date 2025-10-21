@@ -1,31 +1,45 @@
 #include "ScoreBoard.h"
-
-ScoreBoard :: ScoreBoard() {
-
-}
-ScoreBoard :: ~ScoreBoard() {
-
-}
+#include <SFML/Graphics.hpp>
+#include <stdexcept>
 
 ScoreBoard::ScoreBoard() {
-    this->pts = 0;
+    pts = 0;
+    texture = new sf::Texture();
 }
+
 ScoreBoard::~ScoreBoard() {
+    delete texture;
 }
+
 void ScoreBoard::addPts(int value) {
-    this->pts += value;
+    pts += value;
 }
+
 int ScoreBoard::getPts() const {
-    return this->pts;
+    return pts;
 }
+
 void ScoreBoard::setPts(int value) {
-    this->pts = value;
+    pts = value;
 }
+
 void ScoreBoard::Load(std::string fileName) {
-    this->texture->loadFromFile(fileName, sf::IntRect());
-    this->setTexture(*this->texture);
+    if (texture->loadFromFile(fileName, sf::IntRect())) {
+        setTexture(*texture); // Use setTexture from sf::Sprite
+    } else {
+        throw std::runtime_error("Failed to load texture from file: " + fileName);
+    }
 }
+
 void ScoreBoard::Load(std::string fileName, sf::IntRect rect) {
-    this->texture->loadFromFile(fileName, rect);
-    this->setTexture(*this->texture);
+    if (texture->loadFromFile(fileName, rect)) {
+        setTexture(*texture); // Use setTexture from sf::Sprite
+    } else {
+        throw std::runtime_error("Failed to load texture from file: " + fileName);
+    }
+}
+
+void ScoreBoard::update(sf::RenderWindow* window, int timeElapsed) {
+    // Implementation for updating the scoreboard
+    // This can include rendering the score or other updates
 }

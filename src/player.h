@@ -29,6 +29,7 @@ private:
     int health;
     int maxHealth;
     float speed;
+    float stamina;
     //float direction;
 };
 

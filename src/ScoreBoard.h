@@ -2,10 +2,10 @@
 #define SCOREBOARD_H
 
 #include <SFML/Graphics.hpp>
-#include <string>
 #include <iostream>
+#include <string>
 
-class ScoreBoard : public sf::Sprite { // Inherit from sf::Sprite
+class ScoreBoard : public sf::Sprite { 
 public:
     ScoreBoard();
     ~ScoreBoard();
@@ -18,7 +18,7 @@ public:
     void update(sf::RenderWindow* window, int timeElapsed);
 
 private:
-    int pts; // Corrected variable name to match implementation
+    int pts; 
     sf::Texture* texture;
 };
 

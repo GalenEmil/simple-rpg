@@ -1,6 +1,7 @@
+
 #include "ScoreBoard.h"
-#include <SFML/Graphics.hpp>
 #include <stdexcept>
+
 
 ScoreBoard::ScoreBoard() {
     pts = 0;
@@ -39,7 +40,3 @@ void ScoreBoard::Load(std::string fileName, sf::IntRect rect) {
     }
 }
 
-void ScoreBoard::update(sf::RenderWindow* window, int timeElapsed) {
-    // Implementation for updating the scoreboard
-    // This can include rendering the score or other updates
-}

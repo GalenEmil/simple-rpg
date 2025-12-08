@@ -9,6 +9,8 @@
 #include "inputmanager.h"
 #include "mapload.h"
 #include "player.h"
+#include "weapon.h"
+#include "coin.h"
 
 class MainGame : public GameState
 {
@@ -28,6 +30,8 @@ private:
     Map* map;
     Camera* camera;
     Player* player;
+    Weapon* weapon;
+    Coin* coin;
 
     sf::Font font;
     int coinCount = 0;

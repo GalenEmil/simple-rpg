@@ -6,8 +6,10 @@ Player::Player(EntityManager* entityManager, Map *map, Camera *camera, float x, 
     this->camera = camera;
     this->isPlayer = true;
 
-    this->Load("data/gfx/player.png");
+    this->Load("data/gfx/rat.png");
     this->setPosition(x, y);
+    this->setScale(-2.5, 2);
+    this->setOrigin(0, 0);
     this->speed = 0.00015f;
     // Stamina initialization
     this->maxStamina = 3.0f;
@@ -34,9 +36,9 @@ void Player::Update(sf::RenderWindow* window, InputManager inputManager, int tim
     float sprintMultiplier = 1.0f;
     // Reset to normal player sprite
     // Viktor får ändra det till sin råtta om han vill
-    this->Load("data/gfx/player.png");
+    // this->Load("data/gfx/player.png");
     // Reset scale
-    this->setScale(1.0f, 1.0f);
+    // this->setScale(1.0f, 1.0f);
 
     if(isResting == true){
         // Decrease rest timer in seconds
@@ -52,7 +54,7 @@ void Player::Update(sf::RenderWindow* window, InputManager inputManager, int tim
         // Drain stamina per second using actual frame time
         stamina -= 1.0f/60.0f;
         // You become the fast yellow player while sprinting
-        this->Load("data/gfx/fastPlayer.png");
+        // this->Load("data/gfx/fastPlayer.png");
         
         if(stamina <= 0.0f){
             // Start forced rest when stamina depletes
@@ -66,7 +68,7 @@ void Player::Update(sf::RenderWindow* window, InputManager inputManager, int tim
 
         stamina -= 1.0f/60.0f;
         // You become the supermen(logo) while flying
-        this->Load("data/gfx/superman2.png");
+        // this->Load("data/gfx/superman2.png");
         // Scale up the sprite while flying
         this->setScale(2.0f, 2.0f);
         
@@ -86,7 +88,8 @@ void Player::Update(sf::RenderWindow* window, InputManager inputManager, int tim
     }
 
     if(isResting){
-        this->Load("data/gfx/cheese.png");
+        //vet inte varför vi måste bli en ost när vi vilar, vi blir aldrig en RAT igen :(
+        //this->Load("data/gfx/cheese.png");
     }
     speed = speed * sprintMultiplier;
     // Update player velocity
@@ -94,6 +97,16 @@ void Player::Update(sf::RenderWindow* window, InputManager inputManager, int tim
                        inputManager.IsPressed(InputManager::Left) * speed;
     this->velocity.y = inputManager.IsPressed(InputManager::Down) * speed -
                        inputManager.IsPressed(InputManager::Up) * speed;
+
+    if(this->velocity.x > 0) {
+        this->setScale(-2.5, 2);
+        this->setOrigin(0, 0);
+    } else if(this->velocity.x < 0) {
+        this->setScale(2.5, 2);
+        this->setOrigin(40, 0);
+    };
+    
+    // .x = (this->velocity.x > 0) ? -1 : (this->velocity.x < 0) ? 1 : this->scale.x;
 
     // Set correct speed on diagonal movement
     if((this->velocity.x == speed || this->velocity.x == -speed)

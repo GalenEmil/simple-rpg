@@ -13,8 +13,11 @@ sf::Keyboard::Key InputManager::KeyboardConfiguration(Input key) {
 //    Right,
 //    Up,
 //    Down,
+//    LoadMap,
 //    SprintAbility,
 //    FlightAbility,
+//    Help Menu,
+//    Show Controls,
 
     if(key == Left) return sf::Keyboard::A;
     if(key == Right) return sf::Keyboard::D;
@@ -25,6 +28,8 @@ sf::Keyboard::Key InputManager::KeyboardConfiguration(Input key) {
     if(key == Capture) return sf::Keyboard::C;
     if(key == spawnEntity) return sf::Keyboard::N;
     if(key == FlightAbility) return sf::Keyboard::F;
+    if(key == Help) return sf::Keyboard::Num1;
+    if(key == Controls) return sf::Keyboard::Num2;
 
 
     return sf::Keyboard::Unknown;

@@ -49,7 +49,8 @@ void MainGame::Initialize(sf::RenderWindow* window) {
     this->entityManager->SetFont(font);
 
     std::vector<std::wstring> dialogue_options = 
-    {L"Så det är du som är Johan Ostman", 
+    {
+        L"Så det är du som är Johan Ostman", 
         L"Jag hörde att du fick ett \nosthjul i huvudet under en klar natt.\n Är det därför du tror att månen är gjord av ost?", 
         L"Om man tänker på det \n så har månen hål precis som ost", 
         L"Om man tänker på det \nså är månen rund precis som ost", 
@@ -150,6 +151,16 @@ void MainGame::Update(sf::RenderWindow* window) {
         std::cout << "Updating Map..." << std::endl;
         MapLoad(this->map, "data/map/level1.json", 1);
     }
+
+    // Load Help Menu
+    if(inputManager.IsPressed(InputManager::Help)) {
+        std::cout << "Showing Help Menu..." << std::endl;
+    }
+    // Load Controls Menu
+    if(inputManager.IsPressed(InputManager::Controls)) {
+        std::cout << "Showing Controls Menu..." << std::endl;
+    }
+    
     this->camera->Update(window, this->map, sf::Vector2f(this->player->getPosition().x, this->player->getPosition().y));
 }
 
@@ -162,13 +173,35 @@ void MainGame::Render(sf::RenderWindow* window) {
     sf::Vector2f viewSize = this->camera->GetView().getSize();
 
     sf::Vector2f topLeft(viewCenter.x - viewSize.x / 2, viewCenter.y - viewSize.y / 2);
+    sf::Vector2f topRight(viewCenter.x + viewSize.x / 2, viewCenter.y - viewSize.y / 2);
 
+    // Draw coin count
     sf::Text text;
     text.setFont(this->font);
     text.setString("Coins: " + std::to_string(this->coinCount));
     text.setCharacterSize(50);
     text.setFillColor(sf::Color::White);
     text.setPosition(topLeft.x + 10.f, topLeft.y + 10.f);
+
+    // Draw Help Button
+    sf::Text helpText;
+    helpText.setFont(this->font);
+    helpText.setString("Help");
+    helpText.setCharacterSize(20);
+    helpText.setFillColor(sf::Color::White);
+    helpText.setPosition(topRight.x - 200.f, topRight.y + 10.f);
+
+    // Draw Help Button
+    sf::Text controlsText;
+    controlsText.setFont(this->font);
+    controlsText.setString("Controls");
+    controlsText.setCharacterSize(20);
+    controlsText.setFillColor(sf::Color::White);
+    controlsText.setPosition(topRight.x - 100.f, topRight.y + 10.f);
+
+    window->draw(helpText);
+
+    window->draw(controlsText);
 
     window->draw(text);
 }

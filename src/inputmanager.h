@@ -21,6 +21,8 @@ public:
         Capture,
         spawnEntity,
         FlightAbility,
+        Help,
+        Controls,
 
         KeyCount      ///< Keep last -- the total number of inputs
     };

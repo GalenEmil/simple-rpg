@@ -24,23 +24,34 @@ Map::Map() {
 }
 
 void Map::CheckCollision(Entity *entity) {
+    
     // Get check section
-    sf::Vector2f checkWidth = sf::Vector2f(
+
+/*  sf::Vector2f checkWidth = sf::Vector2f(
         (int)entity->getPosition().x / this->tileSet->tileWidth,
         (int)entity->getPosition().x / this->tileSet->tileWidth + 3
     );
     sf::Vector2f checkHeight = sf::Vector2f(
         (int)entity->getPosition().y / this->tileSet->tileWidth,
         (int)entity->getPosition().y / this->tileSet->tileWidth + 3
-    );
+    ); */
+    sf::FloatRect bounds = entity->getGlobalBounds();
 
+    int leftTile = (int)(bounds.left / this->tileSet->tileWidth);
+    int rightTile = (int)((bounds.left + bounds.width) / this->tileSet->tileWidth);
+
+    int topTile = (int)(bounds.top / this->tileSet->tileHeight);
+    int bottomTile = (int)((bounds.top + bounds.height) / this->tileSet->tileHeight);
+
+// Ändrad tile beräkning för collision check
     // Check collision
     int index;
     sf::Sprite tile;
     bool collided = false;
     sf::Vector2i collidedTile;
-    for (int y = checkHeight.x; y < checkHeight.y; y++) {
-        for (int x = checkWidth.x; x < checkWidth.y; x++) {
+
+    for (int y = topTile; y <= bottomTile; y++) {
+        for (int x = leftTile; x <= rightTile; x++) {
 
             // Osynliga kanter
             if (y < 0 || y >= this->collision->data.size() ||
@@ -97,8 +108,6 @@ void Map::CheckCollision(Entity *entity) {
             (int)((entity->getPosition().y + entity->getGlobalBounds().height / 2) / this->tileSet->tileHeight)
         );
 
-        /*
-
         // DOWN_RIGHT
         if(collidedTile.x > entityCenter.x + 1
         && collidedTile.y > entityCenter.y + 1) {
@@ -123,7 +132,6 @@ void Map::CheckCollision(Entity *entity) {
             entity->velocity.x += entity->velocity.x * 2;
             entity->velocity.y += entity->velocity.y * 2;
         }
-
         // RIGHT
         if(collidedTile.x > entityCenter.x
         && collidedTile.y == entityCenter.y) {
@@ -144,46 +152,8 @@ void Map::CheckCollision(Entity *entity) {
         && collidedTile.y < entityCenter.y) {
             entity->velocity.y -= entity->velocity.y * 2;
         }
-        */
 
-        // TODO: make sure collision really works, like print something when you collide
-        // UP
-        if (collidedTile.y + 1 == entityCenter.y) {
-            entity->velocity.y -= entity->velocity.y * 2;
-            if(DEBUG_MODE) {
-                std::cout << "UP!!" << std::endl;
-            }
-        }
-        
-        if (collidedTile.y - 1 ==  entityCenter.y) {
-            entity->velocity.y -= entity->velocity.y * 2;
-            if(DEBUG_MODE) {
-                std::cout << "DOWN!!" << std::endl;
-            }
-        }
-        
-        if (collidedTile.x + 1 == entityCenter.x) {
-            entity->velocity.x -= entity->velocity.x * 2;
-            if(DEBUG_MODE) {
-                std::cout << "RIGHT!!" << std::endl;
-            }
-        }
-        
-        if (collidedTile.x - 1 == entityCenter.x) {
-            entity->velocity.x -= entity->velocity.x * 2;
-            if(DEBUG_MODE) {
-                std::cout << "LEFT!!" << std::endl;
-            }
-        }
-
-        if(DEBUG_MODE) {
-            std::cout << "Tile X: " << collidedTile.x << " : Player X: " << entityCenter.x << std::endl;
-            std::cout << "Tile Y: " << collidedTile.y << " : Player Y: " << entityCenter.y << std::endl;
-            std::cout << "----------------------------------" << std::endl;
-        }
-
-
-        entity->move(entity->velocity.x, entity->velocity.y);
+        entity->move(entity->velocity.x, entity->velocity.y);       
     }
 }
 

@@ -26,7 +26,6 @@ Map::Map() {
 void Map::CheckCollision(Entity *entity) {
     
     // Get check section
-
 /*  sf::Vector2f checkWidth = sf::Vector2f(
         (int)entity->getPosition().x / this->tileSet->tileWidth,
         (int)entity->getPosition().x / this->tileSet->tileWidth + 3
@@ -43,7 +42,6 @@ void Map::CheckCollision(Entity *entity) {
     int topTile = (int)(bounds.top / this->tileSet->tileHeight);
     int bottomTile = (int)((bounds.top + bounds.height) / this->tileSet->tileHeight);
 
-// Ändrad tile beräkning för collision check
     // Check collision
     int index;
     sf::Sprite tile;
@@ -96,18 +94,32 @@ void Map::CheckCollision(Entity *entity) {
                     collidedTile.y = y;
                     break;
                 }
+                if (collided) break;
             }
         }
     }
 
     // Move back if entity collided (tree or solid tile)
+    // Stoppa förflyttning vid kollision
     if(collided) {
-        // Get Entities center x, y position;
+        // Get Entities center x, y position, konverterat till tiles.
         sf::Vector2i entityCenter = sf::Vector2i(
             (int)((entity->getPosition().x + entity->getGlobalBounds().width / 2) / this->tileSet->tileWidth),
             (int)((entity->getPosition().y + entity->getGlobalBounds().height / 2) / this->tileSet->tileHeight)
         );
-
+        if (entity->velocity.x > 0 && collidedTile.x >= entityCenter.x) {
+            entity->velocity.x = 0;
+        }
+        if (entity->velocity.x < 0 && collidedTile.x <= entityCenter.x) {
+            entity->velocity.x = 0;
+        }
+        if (entity->velocity.y > 0 && collidedTile.y >= entityCenter.y) {
+            entity->velocity.y = 0;
+        }
+        if (entity->velocity.y < 0 && collidedTile.y <= entityCenter.y) {
+            entity->velocity.y = 0;
+        }
+/*
         // DOWN_RIGHT
         if(collidedTile.x > entityCenter.x + 1
         && collidedTile.y > entityCenter.y + 1) {
@@ -152,8 +164,8 @@ void Map::CheckCollision(Entity *entity) {
         && collidedTile.y < entityCenter.y) {
             entity->velocity.y -= entity->velocity.y * 2;
         }
-
-        entity->move(entity->velocity.x, entity->velocity.y);       
+*/
+   //    entity->move(entity->velocity.x, entity->velocity.y);       
     }
 }
 
@@ -210,7 +222,6 @@ void Map::Render(sf::RenderWindow *window, Layer *layer) {
                 }
             }
             }
-            
         }
     }
 }
